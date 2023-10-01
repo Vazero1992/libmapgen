@@ -21,7 +21,7 @@ file (GLOB SOURCES "src/*.cpp" "include/*.cpp")
 #output macro definitions include file
 include (GenerateExportHeader)
 add_library(generator SHARED ${SOURCES})
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fms-extensions")
 target_link_libraries(generator voronoi "${PROJECT_SOURCE_DIR}/include/libnoise.lib")
 GENERATE_EXPORT_HEADER (generator
     BASE_NAME generator

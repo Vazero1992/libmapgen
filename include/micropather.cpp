@@ -25,7 +25,7 @@ distribution.
 
 #ifdef _MSC_VER
 #pragma warning( disable : 4786 )	// Debugger truncating names.
-#pragma warning( disable : 4530 )	// Exception handler isn't used
+#pragma warning( disable : 4530 )	// Exception handl     FFer isn't used
 #endif
 
 #include <memory.h>

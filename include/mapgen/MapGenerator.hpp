@@ -37,6 +37,12 @@ public:
   int getPointCount();
   int getOctaveCount();
   int getRelax();
+  
+  float getHeight(int x,int y)
+  {
+      return _heightMap.GetValue(x,y);
+  }
+  
   float getFrequency();
   int getSeed();
   Region *getRegion(Region* r, sf::Vector2f pos);

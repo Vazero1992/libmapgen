@@ -41,8 +41,8 @@ sf::Rect<double> Cell::getBoundingBox() {
 		if (vx > xmax) xmax = vx;
 		if (vy > ymax) ymax = vy;
 	}
-
-    return{ xmin, ymin, xmax - xmin, ymax - ymin };
+    auto retRect = sf::Rect<double> (xmin,ymin,xmax - xmin,ymax-ymin);
+    return retRect;
 }
 
 std::vector<HalfEdge*> Cell::getEdges() {

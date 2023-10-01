@@ -3,8 +3,8 @@
 #include <functional>
 #include "mapgen/City.hpp"
 
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
+#include <filesystem>
+namespace fs = std::filesystem;
 
 typedef sf::Vector2<double>* Point;
 namespace mg {
