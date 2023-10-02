@@ -67,6 +67,7 @@ MapGenerator::MapGenerator(int w, int h) : _w(w), _h(h) {
   _terrainType = "basic";
   map = nullptr;
   simulator = nullptr;
+  _seaLevel = 0.0625f;
   _gen = new std::mt19937(_seed);
 }
 
@@ -305,6 +306,8 @@ float MapGenerator::getFrequency() { return _freq; }
 void MapGenerator::setFrequency(float f) { _freq = f; }
 
 void MapGenerator::setPointCount(int c) { _pointsCount = c; }
+
+void MapGenerator::setSeaLevel(float seaLevel) {_seaLevel = seaLevel;}
 
 //TODO: add "light" for applying new weather
 void MapGenerator::update() {
@@ -858,7 +861,8 @@ void MapGenerator::makeRegions() {
     ht = ht / count;
     sf::Vector2<double> &p = c->site.p;
     h.insert(std::make_pair(&p, ht));
-    Biom b = ht < 0.0625 ? biom::SEA : biom::LAND;
+    Biom b = ht < 0.0625f ? biom::SEA : biom::LAND;
+    
     Region *region = new Region(b, verts, h, &p);
     region->city = nullptr;
     region->cell = c;

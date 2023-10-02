@@ -12,7 +12,7 @@
 using json = nlohmann::json;
 
 json world;
-char buff[10000000];
+char buff[70000000];
 module::Perlin _perlin;
 utils::NoiseMap _heightMap;
 utils::NoiseMap _mineralsMap;
@@ -26,7 +26,7 @@ int _seed;
 MapGenerator* mapgen;
 
 extern "C" {
-        UNITY_LIB_API int createMap (int seed, int w, int h,int octave,float frequency,int pointCount,const char* terrainType) 
+        UNITY_LIB_API int createMap (int seed, int w, int h,int octave,float frequency,int pointCount, float seaLevel,const char* terrainType) 
         {
             _terrainType = std::string (terrainType);
 
@@ -42,6 +42,7 @@ extern "C" {
             mapgen->setOctaveCount(octave);
             mapgen->setPointCount(pointCount);
             mapgen->setSeed(seed);
+            mapgen->setSeaLevel(seaLevel);
             mapgen->update();
     
             world = json({});

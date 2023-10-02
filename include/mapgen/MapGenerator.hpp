@@ -34,6 +34,7 @@ public:
   void setSize(int w, int h);
   void setFrequency(float freq);
   void setPointCount(int count);
+  void setSeaLevel(float seaLevel);
   int getPointCount();
   int getOctaveCount();
   int getRelax();
@@ -88,6 +89,7 @@ private:
   int _relax;
   int _octaves;
   float _freq;
+  float _seaLevel;
   sf::Rect<double> _bbox;
   std::vector<sf::Vector2<double>> *_sites;
   std::map<Cell *, Region *> _cells;
