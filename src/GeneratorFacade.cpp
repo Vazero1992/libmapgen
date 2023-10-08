@@ -26,7 +26,7 @@ int _seed;
 MapGenerator* mapgen;
 
 extern "C" {
-        UNITY_LIB_API int createMap (int seed, int w, int h,int octave,float frequency,int pointCount, float seaLevel,const char* terrainType) 
+    UNITY_LIB_API int createMap (int seed, int w, int h,int octave,float frequency,int pointCount, float seaLevel,const char* terrainType) 
         {
             _terrainType = std::string (terrainType);
 
@@ -50,6 +50,8 @@ extern "C" {
             auto mClusters = json::array();
             auto clusters = json::array();
             auto rivers = json::array();
+            auto cities = json::array();
+            
             
             int n = 0;
 
@@ -163,11 +165,29 @@ extern "C" {
                 i++;
             }
             
+            
+            
+            i = 0;
+            n = 0;
+
+            for (i = 0; i < mapgen->map->cities.size() ; i++) 
+            {
+                City* c = mapgen->map->cities[i];
+                auto it = std::find(mapgen->map->regions.begin(), mapgen->map->regions.end(), c->region);
+                auto mc = json({});
+                mc["id"] = i;
+                mc["name"] = c->name;
+                mc["region"] = std::distance(mapgen->map->regions.begin(), it);
+                mc["typeName"] = c->typeName;
+                cities.push_back(mc);
+            }
+            
     
             world["regions"] = regions;
             world["megaClusters"] = mClusters;
             world["clusters"] = clusters;
             world["rivers"] = rivers;
+            world["cities"] = cities;
             auto dump = world.dump();
             std::strcpy(buff, dump.c_str());
             return dump.length() + 1;
@@ -253,11 +273,6 @@ extern "C" {
         heightMapBuilder.SetDestSize(_w, _h);
         heightMapBuilder.SetBounds(0.0, 10.0, 0.0, 10.0);
         heightMapBuilder.Build();
-    }
-    
-    UNITY_LIB_API float ClearHeightMap()
-    {
-            
     }
     
 }
