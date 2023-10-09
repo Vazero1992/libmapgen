@@ -1,0 +1,12 @@
+﻿Release
+x64
+.idea
+CMakeFiles
+Debug
+*.filters
+*.vcxproj
+*.sln
+generator_Export.h
+generator.sln.DotSettings.user
+CMakeCache.txt
+*.cmake

@@ -97,7 +97,8 @@ extern "C" {
             }
     
             n = 0;
-            for (auto c : mapgen->map->megaClusters) {
+            for (auto c : mapgen->map->megaClusters)
+            {
                 auto mc = json({});
                 mc["id"] = n;
                 mc["name"] = c->name;
@@ -114,6 +115,22 @@ extern "C" {
                 v.erase(last, v.end());
                 mc["clusters"] = v;
                 mc["regions"] = c->regions.size();
+
+
+                auto f_startpoints = json::array();
+                auto f_endpoints = json::array();
+                int point_index = 0;
+                for (point_index = 0; point_index < c->border.size(); point_index++)
+                {
+                    auto start = c->border[point_index];
+                    auto end = c->borderEndPoint[point_index];
+                    f_startpoints.push_back({ {"x",start->x }, {"y", start->y},{"height",mapgen->getHeight(start->x,start->y)} });
+                    f_endpoints.push_back({ {"x",end->x }, {"y", end->y} ,{"height",mapgen->getHeight(end->x,end->y)}});
+                }
+
+                mc["borderStartPoints"] = f_startpoints;
+                mc["borderEndPoints"] = f_endpoints;
+                
                 mClusters.push_back(mc);
                 n++;
             }

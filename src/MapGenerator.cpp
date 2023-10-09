@@ -573,6 +573,7 @@ void MapGenerator::makeBorders() {
             if (c->pointIntersection(e->startPoint()->x, e->startPoint()->y) ==
                 0) {
               r->megaCluster->border.push_back(e->startPoint());
+              r->megaCluster->borderEndPoint.push_back(e->endPoint());
             }
           }
         }

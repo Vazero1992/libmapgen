@@ -62,6 +62,7 @@ struct Cluster {
   bool isLand = false;;
   Point* center = nullptr;
   PointList border;
+  PointList borderEndPoint;
   std::vector<Region*> resourcePoints;
   std::vector<Region*> goodPoints;
   std::vector<City*> cities;
